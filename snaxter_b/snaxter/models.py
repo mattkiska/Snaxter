@@ -18,6 +18,8 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     website = models.CharField(max_length=50)
+    opens = models.TimeField(default='00:00:00')
+    closes = models.TimeField(default='00:00:00')
     cuisine = [
         ('American', 'American'),
         ('Chinese', 'Chinese'),
@@ -30,6 +32,7 @@ class Restaurant(models.Model):
     ]
     cuisine_type = models.CharField(max_length=50, choices=cuisine)
     description = models.CharField(max_length=50)
+    restaurant_picture = models.ImageField(upload_to='images/', default='images/default.jpg')
 
     def __str__(self):
         return self.name
@@ -39,6 +42,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length=50)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='menu_items', default='')
+    item_picture = models.ImageField(upload_to='images/', default='images/default.jpg')
 
     def __str__(self):
         return self.name
