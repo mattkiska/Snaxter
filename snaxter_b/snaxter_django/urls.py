@@ -11,6 +11,6 @@ route.register('menu_items', MenuItemView, basename='menu_itemsview')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(route.urls)),
+    path('api/', include(route.urls)),
     path('api-auth/', include('rest_framework.urls'), name='rest_framework'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

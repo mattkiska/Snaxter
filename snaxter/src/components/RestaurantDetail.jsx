@@ -7,44 +7,43 @@ import { Link } from 'react-router-dom'
 
 function RestaurantDetail() {
   const { id } = useParams()
-  const [restaurant, setRestaurant] = useState([])
-  const navigate = useNavigate()
+  const [restaurant, setRestaurant] = useState(null)
   useEffect(() => {
     const getRestaurant = async () => {
-      const response = await axios.get(`http://localhost:8000/restaurants/${id}`)
+      const response = await axios.get(
+        `http://localhost:8000/api/restaurants/${id}`
+        )
       setRestaurant(response.data)
+      console.log(response.data)
     }
     getRestaurant()
-    console.log(restaurant)
   }, [])
   
   return restaurant ? (
     <div className="container">
       <div className="row">
-        <div className="col-12">
+        <div className="restaurant-detail">
           <img src={restaurant.restaurant_picture} alt={restaurant.name} height="250px"/>
           <h3>{restaurant.name}</h3>
-          <p>{restaurant.description}</p>
           <p>{restaurant.address}</p>
           <p>{restaurant.phone}</p>
           <p>{restaurant.email}</p>
           <p>{restaurant.website}</p>
-          <p>{restaurant.opening_hours}</p>
-          <p>{restaurant.closing_hours}</p>
+          <p>{restaurant.opens}</p>
+          <p>{restaurant.closes}</p>
+          <p>{restaurant.description}</p>
           </div>
-          <div className="col-12">
-            <h3>Menu</h3>
-            <div className="row">
-              {restaurant.menu.map((food) => (
-                <div className="col-4" key={food.id}>
-                  <Link to={`/restaurants/${id}/food/${food.id}`}>
-                    <img src={food.food_picture} alt={food.name} height="250px"/>
-                    <h3>{food.name}</h3>
-                  </Link>
-                </div>
-              ))}
+        <div className="menu">
+          <h3>Menu</h3>
+          {restaurant.menu_items.map((item) => (
+            <div className="menu-item" key={item.id}>
+              <img src={item.item_picture} alt={item.name} height="250px"/>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <p>{item.price}</p>
             </div>
-          </div>
+          ))}
+        </div>
       </div>
     </div>
   ) : (

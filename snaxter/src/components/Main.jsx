@@ -13,7 +13,7 @@ function Main() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/restaurant/:id" element={<RestaurantDetail />} />
+            <Route path="/restaurants/:id" element={<RestaurantDetail />} />
             <Route path="/signin" element={<SignInForm />} />
             <Route path="/register" element={<RegisterForm />} />
         </Routes>

@@ -7,11 +7,11 @@ function Restaurants() {
   const [restaurants, setRestaurants] = useState([])
   useEffect(() => {
     const getRestaurants = async () => {
-      const response = await axios.get('http://localhost:8000/restaurants')
+      const response = await axios.get('http://localhost:8000/api/restaurants')
       setRestaurants(response.data)
+      console.log(response.data)
     }
     getRestaurants()
-    console.log(restaurants)
   }, [])
 
   return restaurants ? (
