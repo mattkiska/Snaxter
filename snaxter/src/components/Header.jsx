@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SnaxterLogo from "../assets/snaxterlogo.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   return (
@@ -10,9 +11,6 @@ function Header() {
       <Link to="/">
         <img className="logo" src={SnaxterLogo} alt="Snaxter Logo" />
       </Link>
-      <button>
-        Cart
-      </button>
     </div>
   );
 }

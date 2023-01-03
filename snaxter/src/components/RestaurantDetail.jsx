@@ -32,9 +32,9 @@ function RestaurantDetail(props) {
           <p>{restaurant.website}</p>
           <p>{restaurant.description}</p>
           <p>Contact us at: {restaurant.email}</p>
-          </div>
+        </div>
         <div className="menu">
-          <h3>Menu</h3>
+          <h2>Menu</h2>
           {restaurant.menu_items.map((item) => (
             <div
               style={{backgroundImage: `url(${item.item_picture})`}}
