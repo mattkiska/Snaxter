@@ -1,27 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function Restaurants() {
-  const [restaurants, setRestaurants] = useState([])
+  const [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
     const getRestaurants = async () => {
-      const response = await axios.get('http://localhost:8000/api/restaurants')
-      setRestaurants(response.data)
-      console.log(response.data)
-    }
-    getRestaurants()
-  }, [])
+      const response = await axios.get(
+        "http://localhost:8000/api/restaurants/"
+      );
+      setRestaurants(response.data);
+      console.log(response.data);
+    };
+    getRestaurants();
+  }, []);
 
   return restaurants ? (
-    <div className="container">
-      <div className="row">
+    <div className="rest-row">
+      <div className="rest-column">
         {restaurants.map((restaurant) => (
-          <div className="restaurants" key={restaurant.id}>
-            <Link to={`/restaurants/${restaurant.id}`}>
-              <img src={restaurant.restaurant_picture} alt={restaurant.name} height="250px"/>
-              <h3>{restaurant.name}</h3>
+          <div
+            style={{ backgroundImage: `url(${restaurant.restaurant_picture})` }}
+            className="rest-card"
+            key={restaurant.id}
+          >
+            <Link to={`/restaurants/${restaurant.id}`} className="rest-name">
+              <div className="rest-info">
+                <h3>{restaurant.name}</h3>
+                <h4>{restaurant.cuisine_type}</h4>
+              </div>
             </Link>
           </div>
         ))}
@@ -29,7 +37,7 @@ function Restaurants() {
     </div>
   ) : (
     <div>Loading...</div>
-  )
+  );
 }
 
-export default Restaurants
+export default Restaurants;
